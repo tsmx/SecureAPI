@@ -1,0 +1,29 @@
+{
+  "name": "secureapi",
+  "version": "1.0.0",
+  "description": "A simple test project for creating a secured REST-API.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tsmx/SecureAPI.git"
+  },
+  "keywords": [
+    "api",
+    "token",
+    "security",
+    "webtoken",
+    "authentication"
+  ],
+  "author": "Sebastian Stricker",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tsmx/SecureAPI/issues"
+  },
+  "homepage": "https://github.com/tsmx/SecureAPI#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
