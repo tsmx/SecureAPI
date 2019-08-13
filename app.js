@@ -1,9 +1,7 @@
-const jwt = require('jsonwebtoken');
 const express = require('express');
 const app = express();
-
-// TODO create cryptographic secure secret
-const secret = 'ThiSISAsecrET';
+const createAndSendToken = require('./security/tokenhandler').createAndSendToken;
+const verifyToken = require('./security/tokenhandler').verifyToken;
 
 app.get('/', (req, res) => {
     res.json({
@@ -24,32 +22,7 @@ app.post('/api/login', (req, res) => {
         id: 1234,
         username: 'sest'
     };
-    jwt.sign({ user: user }, secret, (err, token) => {
-        res.json({
-            token: token
-        });
-    });
+    createAndSendToken(res, user);
 });
-
-function verifyToken(req, res, next) {
-    const authorizationHeader = req.headers['authorization'];
-    if (typeof authorizationHeader !== 'undefined') {
-        const bearer = authorizationHeader.split(' ');
-        if(bearer.length < 2) {
-            res.sendStatus(403);
-        }
-        const bearerToken = bearer[1];
-        jwt.verify(bearerToken, secret, (err, authData) => {
-            if(err) {
-                res.sendStatus(403);
-            } else {
-                req.authData = authData;
-                next();
-            }
-        })
-    } else {
-        res.sendStatus(403);
-    }
-}
 
 app.listen(5000, () => { console.log('SecureAPI server running on port 5000') });
