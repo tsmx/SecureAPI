@@ -13,9 +13,10 @@
   "keywords": [
     "api",
     "token",
-    "security",
+    "jsonwebtoken",
     "webtoken",
-    "authentication"
+    "authentication",
+    "security"
   ],
   "author": "Sebastian Stricker",
   "license": "MIT",
