@@ -6,7 +6,9 @@ var userSchema = mongoose.Schema({
 	email: String,
 	active: Boolean,
     password: String,
-    salt: String
+	salt: String,
+	attempts: Number,
+	description: String
 });
 
 // compile & export the master data model
