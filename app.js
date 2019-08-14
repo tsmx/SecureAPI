@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const createAndSendToken = require('./security/tokenhandler').createAndSendToken;
+const createToken = require('./security/tokenhandler').createToken;
 const verifyToken = require('./security/tokenhandler').verifyToken;
 
 app.get('/', (req, res) => {
@@ -22,7 +22,13 @@ app.post('/api/login', (req, res) => {
         id: 1234,
         username: 'sest'
     };
-    createAndSendToken(res, user);
+    createToken(user,
+        (err) => {
+            res.sendStatus(403);
+        },
+        (token) => {
+            res.json({ token: token });
+        });
 });
 
 app.listen(5000, () => { console.log('SecureAPI server running on port 5000') });

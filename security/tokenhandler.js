@@ -2,11 +2,13 @@ const jwt = require('jsonwebtoken');
 // TODO create cryptographic secure secret
 const secret = 'ThiSISAsecrET';
 
-module.exports.createAndSendToken = function(res, user) {
+module.exports.createToken = function(user, cbError, cbSuccess) {
     jwt.sign({ user: user }, secret, { expiresIn: '30s' }, (err, token) => {
-        res.json({
-            token: token
-        });
+        if(err) {
+            cbError(err);
+        } else {
+            cbSuccess(token);
+        }
     });
 };
 
