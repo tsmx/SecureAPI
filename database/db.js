@@ -2,23 +2,21 @@ var mongoose = require('mongoose');
 var dbURI = 'mongodb://mongoservice:27017/secureapi';
 
 // Create the database connection 
-mongoose.connect(dbURI, { useNewUrlParser: true });
-
-// CONNECTION EVENTS
-// When successfully connected
-mongoose.connection.on('connected', function () {
-    console.log('Mongoose default connection open to ' + dbURI);
-});
-
-// If the connection throws an error
-mongoose.connection.on('error', function (err) {
-    console.log('Mongoose default connection error: ' + err);
-});
-
-// When the connection is disconnected
-mongoose.connection.on('disconnected', function () {
-    console.log('Mongoose default connection disconnected');
-});
+function connect(cb) {
+    mongoose.connect(dbURI, { useNewUrlParser: true, useCreateIndex: true });
+    var db = mongoose.connection;
+    db.on('error', function (err) {
+        console.log('Mongoose default connection error: ' + err);
+        process.exit(1);
+    });
+    db.on('disconnected', function () {
+        console.log('Mongoose default connection disconnected');
+    });
+    db.once('open', function () {
+        console.log('Mongoose default connection open to ' + dbURI);
+        cb();
+    });
+};
 
 // If the Node process ends, close the Mongoose connection 
 process.on('SIGINT', function () {
@@ -28,4 +26,5 @@ process.on('SIGINT', function () {
     });
 });
 
-module.exports = mongoose;
+module.exports.connect = function (cb) { connect(cb); };
+module.exports.mongoose = mongoose;

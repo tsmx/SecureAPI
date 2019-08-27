@@ -1,4 +1,5 @@
 const express = require('express');
+const connectDB = require('./database/db').connect;
 const createToken = require('./security/tokenhandler').createToken;
 const verifyToken = require('./security/tokenhandler').verifyToken;
 const verifyUser = require('./security/userhandler').verifyUser;
@@ -62,4 +63,6 @@ app.post('/api/login', (req, res) => {
     });
 });
 
-app.listen(5000, () => { console.log('SecureAPI server running on port 5000') });
+connectDB(() => {
+    app.listen(5000, () => { console.log('SecureAPI server running on port 5000') });
+});
