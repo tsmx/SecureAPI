@@ -7,11 +7,11 @@ var userSchema = mongoose.Schema({
 	active: { type: Boolean, default: false },
 	password: { type: String, required: true },
 	salt: { type: String, required: true },
-	attempts: Number,
+	attempts: { type: Number, default: 0 },
 	description: String,
 	activation: {
 		key: String,
-		vaildUntil: Date
+		validUntil: Date
 	}
 });
 
