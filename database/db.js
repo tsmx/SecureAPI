@@ -3,7 +3,11 @@ var dbURI = 'mongodb://mongoservice:27017/secureapi';
 
 // Create the database connection 
 function connect(cb) {
-    mongoose.connect(dbURI, { useNewUrlParser: true, useCreateIndex: true });
+    mongoose.connect(dbURI, {
+        useNewUrlParser: true,
+        useCreateIndex: true,
+        useUnifiedTopology: true
+    });
     var db = mongoose.connection;
     db.on('error', function (err) {
         console.log('Mongoose default connection error: ' + err);
