@@ -1,11 +1,12 @@
 var mongoose = require('mongoose');
 var dbURI = 'mongodb://mongoservice:27017/secureapi';
 
+mongoose.set('strictQuery', false);
+
 // Create the database connection 
 function connect(cb) {
     mongoose.connect(dbURI, {
         useNewUrlParser: true,
-        useCreateIndex: true,
         useUnifiedTopology: true
     });
     var db = mongoose.connection;
