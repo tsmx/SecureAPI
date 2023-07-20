@@ -7,6 +7,9 @@
     "type": "git",
     "url": "git+https://github.com/tsmx/SecureAPI.git"
   },
+  "scripts": {
+    "start": "node app.js"
+  },
   "keywords": [
     "api",
     "token",
@@ -15,16 +18,15 @@
     "authentication",
     "security"
   ],
-  "author": "Sebastian Stricker",
+  "author": "tsmx <dev@tsmx.net>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/tsmx/SecureAPI/issues"
   },
   "homepage": "https://github.com/tsmx/SecureAPI#readme",
   "dependencies": {
-    "body-parser": "^1.20.1",
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.0",
-    "mongoose": "^6.8.0"
+    "mongoose": "^7.4.0"
   }
 }

@@ -2,11 +2,10 @@ const express = require('express');
 const connectDB = require('./database/db').connect;
 const verifyToken = require('./security/tokenhandler').verifyToken;
 const userHandler = require('./security/userhandler');
-const bodyParser = require('body-parser');
 
 const app = express();
 
-app.use(bodyParser.json());
+app.use(express.json());
 
 app.get('/', (req, res) => {
     res.json({
