@@ -5,10 +5,7 @@ mongoose.set('strictQuery', false);
 
 // Create the database connection 
 function connect(cb) {
-    mongoose.connect(dbURI, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-    });
+    mongoose.connect(dbURI);
     var db = mongoose.connection;
     db.on('error', function (err) {
         console.log('Mongoose default connection error: ' + err);
