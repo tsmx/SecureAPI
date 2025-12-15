@@ -8,7 +8,8 @@
     "url": "git+https://github.com/tsmx/SecureAPI.git"
   },
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "test": "true"
   },
   "keywords": [
     "api",
