@@ -181,9 +181,6 @@ res.status(200).json({ ... });    // explicit 200 is acceptable but optional
 
 - `database/db.js` uses `var` declarations — inconsistent with the rest of the
   codebase; use `const`/`let` in new code.
-- `security/userhandler.js` `activateUser` has a scoping bug where `error` is
-  referenced inside a `.then()` block but is only in scope inside the sibling
-  `.catch()` block.
 - `security/cryptohandler.js` has a double semicolon `;;` on the
   `createRandomString` return statement.
 - JWT expiry is set to `'30s'` — likely too short for production.
