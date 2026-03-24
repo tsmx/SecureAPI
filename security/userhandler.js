@@ -122,7 +122,7 @@ module.exports.activateUser = function (req, res) {
             user.active = true;
             user.save()
                 .then((saveUser) => {
-                    console.log('activateUser: activation successful for user: ' + error);
+                    console.log('activateUser: activation successful for user: ' + saveUser.username);
                     res.status(200).json({
                         message: 'user activated',
                         userName: saveUser.username,

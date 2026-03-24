@@ -26,6 +26,10 @@ app.post('/api/register', userHandler.registerUser);
 
 app.get('/api/activate', userHandler.activateUser);
 
-connectDB(() => {
-    app.listen(5000, () => { console.log('SecureAPI server running on port 5000') });
-});
+if (require.main === module) {
+    connectDB(() => {
+        app.listen(5000, () => { console.log('SecureAPI server running on port 5000'); });
+    });
+}
+
+module.exports = app;
