@@ -8,7 +8,7 @@ Guidelines for agentic coding assistants working in this repository.
 
 SecureAPI is a Node.js/Express REST API providing user registration, login, and account activation with JWT-based authentication and MongoDB persistence. The codebase is plain JavaScript (CommonJS), with no build step or TypeScript compilation.
 
-**Stack:** Node.js · Express 4 · Mongoose 8 · jsonwebtoken 9 · MongoDB
+**Stack:** Node.js · Express 5 · Mongoose 9 · jsonwebtoken 9 · MongoDB
 
 ---
 
@@ -39,12 +39,18 @@ npm start          # runs: node app.js  (listens on port 5000)
 ### Run tests
 ```bash
 npm test                                        # run all tests
+npm test -- --coverage                          # run all tests with coverage report
 npx jest tests/login.test.js                   # run a single test file
 npx jest --testNamePattern "returns 200"       # run tests matching a name
 ```
 
 Tests live in `tests/` and use **Jest** + **supertest**. MongoDB is mocked via
 `jest.mock('../database/userSchema')` — no live database is required.
+
+Coverage is reported to [Coveralls](https://coveralls.io/) via the CI workflow.
+The workflow runs a parallel build across Node.js 20.x, 22.x, and 24.x and
+uses `coverallsapp/github-action@v2` with `parallel: true` per matrix job and
+a dedicated `finish` job (`parallel-finished: true`) to close the build.
 
 ### Linting / Formatting
 No linter or formatter is configured. If you introduce one, prefer ESLint with
