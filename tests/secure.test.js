@@ -21,6 +21,14 @@ afterEach(() => {
     jest.clearAllMocks();
 });
 
+describe('GET /', () => {
+    test('returns 200 with service running message', async () => {
+        const res = await request(app).get('/');
+        expect(res.status).toBe(200);
+        expect(res.body).toHaveProperty('message', 'SecureAPI service is running...');
+    });
+});
+
 describe('POST /api/secure', () => {
     test('returns 403 with no Authorization header', async () => {
         const res = await request(app).post('/api/secure');

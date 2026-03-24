@@ -80,4 +80,26 @@ describe('GET /api/activate', () => {
         expect(res.body).toHaveProperty('message', 'user activated');
         expect(res.body).toHaveProperty('userName', 'alice');
     });
+
+    test('returns 403 when save fails during activation', async () => {
+        const saveMock = jest.fn().mockRejectedValue(new Error('db write error'));
+        mockFindOne.mockResolvedValue({
+            username: 'alice',
+            active: false,
+            activation: { key: 'code123', validUntil: new Date(Date.now() + 100000) },
+            save: saveMock
+        });
+        const res = await request(app)
+            .get('/api/activate')
+            .query({ username: 'alice', activation: 'code123' });
+        expect(res.status).toBe(403);
+    });
+
+    test('returns 403 when database query fails', async () => {
+        mockFindOne.mockRejectedValue(new Error('db error'));
+        const res = await request(app)
+            .get('/api/activate')
+            .query({ username: 'alice', activation: 'code123' });
+        expect(res.status).toBe(403);
+    });
 });
